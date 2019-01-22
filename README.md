@@ -7,10 +7,8 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```Siim Liimand``` ```siimliimand``` ```https://github.com/siimliimand``` ```siim.liimand@gmail.com``` ```sf4``` ```api-user``` ```User module``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+
 
 ## Structure
 
@@ -35,9 +33,26 @@ $ composer require sf4/api-user
 
 ## Usage
 
-``` php
-$skeleton = new sf4\api-user();
-echo $skeleton->echoPhrase('Hello, League!');
+config/routes.yaml
+``` yaml
+api_user:
+    resource: '../vendor/sf4/api-user/src/Routes/api-user.yaml'
+    prefix: /user
+```
+
+config/services.yaml
+``` yaml
+services:
+
+# ...
+
+    Sf4\Api\RequestHandler\RequestHandlerInterface:
+# ...
+        -   method: setAvailableRoutes
+            arguments:
+                -   api_default: 'Sf4\Api\Request\DefaultRequest'
+# ...
+                    api_user_detail: 'Sf4\ApiUser\Request\DetailRequest'
 ```
 
 ## Change log
@@ -61,7 +76,6 @@ If you discover any security related issues, please email siim.liimand@gmail.com
 ## Credits
 
 - [Siim Liimand][link-author]
-- [All Contributors][link-contributors]
 
 ## License
 
@@ -80,4 +94,3 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-code-quality]: https://scrutinizer-ci.com/g/sf4/api-user
 [link-downloads]: https://packagist.org/packages/sf4/api-user
 [link-author]: https://github.com/siimliimand
-[link-contributors]: ../../contributors
