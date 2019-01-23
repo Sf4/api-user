@@ -8,7 +8,9 @@
 
 namespace Sf4\ApiUser\Dto\Response;
 
-class DetailDto
+use Sf4\Api\Dto\DtoInterface;
+
+class DetailDto implements DtoInterface
 {
     public $uuid;
 

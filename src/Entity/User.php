@@ -14,6 +14,12 @@ use Sf4\Api\Entity\Traits\EntityIdTrait;
 use Sf4\Api\Entity\Traits\StatusTrait;
 use Sf4\Api\Entity\Traits\TimestampableTrait;
 
+/**
+ * @ORM\Entity(repositoryClass="Sf4\ApiUser\Repository\UserRepository")
+ * @ORM\Table(indexes={
+ *     @ORM\Index(name="email_idx", columns={"email"})
+ * })
+ */
 class User implements EntityInterface
 {
     use EntityIdTrait;

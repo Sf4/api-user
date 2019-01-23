@@ -11,6 +11,9 @@ namespace Sf4\ApiUser\Entity;
 use Sf4\Api\Entity\EntityInterface;
 use Sf4\Api\Entity\Traits\EntityIdTrait;
 
+/**
+ * @ORM\Entity(repositoryClass="f4\ApiUser\Repository\UserDetailRepository")
+ */
 class UserDetail implements EntityInterface
 {
     use EntityIdTrait;
