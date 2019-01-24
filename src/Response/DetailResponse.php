@@ -23,7 +23,7 @@ class DetailResponse extends AbstractResponse
         $dto = new DetailDto();
         $dto->status = 'active';
         $dto->avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
-        $data = $this->getData('3f2c07bc-eb3c-4fc8-95df-b2db7559cd41', UserDetail::class, $dto);
+        $data = $this->getData('96340873-2f61-44e7-9d79-c63ad0a699f0', UserDetail::class, $dto);
         $this->setResponseData($data);
     }
 
@@ -42,8 +42,10 @@ class DetailResponse extends AbstractResponse
             if($data) {
                 try {
                     $populator = new Populator();
-                    $object = $populator->populate($data, $dto);
-                    return $populator->unpopulate($object);
+                    /** @var DetailDto $dto */
+                    $populator->populate($data, $dto);
+                    $dto->roles = json_decode($dto->roles);
+                    return $populator->unpopulate($dto);
                 } catch (\ReflectionException $e) {
                     return null;
                 }

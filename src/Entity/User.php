@@ -8,7 +8,7 @@
 
 namespace Sf4\ApiUser\Entity;
 
-
+use Doctrine\ORM\Mapping as ORM;
 use Sf4\Api\Entity\EntityInterface;
 use Sf4\Api\Entity\Traits\EntityIdTrait;
 use Sf4\Api\Entity\Traits\StatusTrait;
