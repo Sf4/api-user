@@ -9,11 +9,10 @@
 namespace Sf4\ApiUser\Dto\Response;
 
 use Sf4\Api\Dto\AbstractDto;
+use Sf4\Api\Setting\StatusSettingInterface;
 
-class DetailDto extends AbstractDto
+class DetailDto extends AbstractDto implements DetailDtoInterface
 {
-    const STATUS_ACTIVE = 'active';
-    const STATUS_INACTIVE = 'inactive';
 
     protected $id;
 
@@ -31,7 +30,7 @@ class DetailDto extends AbstractDto
 
     public function getStatusCode()
     {
-        return $this->status == 1 ? static::STATUS_ACTIVE : static::STATUS_INACTIVE;
+        return $this->status == StatusSettingInterface::ACTIVE ? static::STATUS_CODE_ACTIVE : static::STATUS_CODE_INACTIVE;
     }
 
     public function getAvatarOrDefault()
