@@ -48,7 +48,7 @@ class User implements EntityInterface
     protected $api_token;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserDetail", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\UserDetail", cascade={"persist"})
      */
     protected $userDetail;
 
