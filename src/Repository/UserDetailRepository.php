@@ -20,7 +20,12 @@ class UserDetailRepository extends AbstractRepository
      */
     public function getDetailData($userUuid): ?array
     {
-        $sql = 'SELECT u.uuid AS id, u.email, u.roles, d.first_name AS firstName, d.last_name AS lastName ';
+        if(empty($userUuid)) {
+            return null;
+        }
+        
+        $sql = 'SELECT u.uuid AS id, u.email, u.roles, u.status ';
+        $sql .= ', d.first_name AS firstName, d.last_name AS lastName, d.avatar ';
         $sql .= 'FROM ' . UserRepository::TABLE_NAME . ' AS u ';
         $sql .= 'JOIN ' . static::TABLE_NAME . ' AS d ON d.id = u.user_detail_id ';
         $sql .= 'WHERE u.uuid = ? AND u.deleted_at IS NULL';

@@ -29,6 +29,11 @@ class UserDetail implements EntityInterface
      */
     protected $lastName;
 
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : ""})
+     */
+    protected $avatar;
+
     public function getFullName(): string
     {
         $fullName = $this->getFirstName() . ' ' . $this->getLastName();
@@ -69,5 +74,21 @@ class UserDetail implements EntityInterface
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar): void
+    {
+        $this->avatar = $avatar;
     }
 }

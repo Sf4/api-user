@@ -8,12 +8,10 @@
 
 namespace Sf4\ApiUser\Response;
 
-use Sf4\Api\Dto\DtoInterface;
 use Sf4\Api\Response\AbstractResponse;
 use Sf4\ApiUser\Dto\Response\DetailDto;
 use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\Repository\UserDetailRepository;
-use Sf4\Populator\Populator;
 
 class DetailResponse extends AbstractResponse
 {
@@ -21,37 +19,34 @@ class DetailResponse extends AbstractResponse
     public function init()
     {
         $dto = new DetailDto();
-        $dto->status = 'active';
-        $dto->avatar = 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
-        $data = $this->getData('96340873-2f61-44e7-9d79-c63ad0a699f0', UserDetail::class, $dto);
-        $this->setResponseData($data);
+        $userId = $this->getIdFromRequest();
+        $this->populateDetailDto($dto,$userId);
+        $dto->status = $dto->getStatusCode();
+        $dto->avatar = $dto->getAvatarOrDefault();
+        $dto->roles = json_decode($dto->roles);
+        $this->setResponseDto($dto);
+    }
+
+    protected function getIdFromRequest()
+    {
+        $request = $this->getRequest()->getRequest();
+
+        return $request->get('id');
     }
 
     /**
-     * @param $id
-     * @param string $entityClass
-     * @param DtoInterface $dto
-     * @return array|null
+     * @param DetailDto $dto
+     * @param $userUuid
      */
-    protected function getData($id, string $entityClass, DtoInterface $dto): ?array
+    protected function populateDetailDto(DetailDto $dto, $userUuid)
     {
         /** @var UserDetailRepository $repository */
-        $repository = $this->getRepository($entityClass);
+        $repository = $this->getRepository(UserDetail::class);
         if($repository) {
-            $data = $repository->getDetailData($id);
+            $data = $repository->getDetailData($userUuid);
             if($data) {
-                try {
-                    $populator = new Populator();
-                    /** @var DetailDto $dto */
-                    $populator->populate($data, $dto);
-                    $dto->roles = json_decode($dto->roles);
-                    return $populator->unpopulate($dto);
-                } catch (\ReflectionException $e) {
-                    return null;
-                }
+                $this->populateDto($dto, $data);
             }
         }
-
-        return null;
     }
 }
