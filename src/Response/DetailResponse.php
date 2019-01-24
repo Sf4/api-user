@@ -21,9 +21,6 @@ class DetailResponse extends AbstractResponse
         $dto = new DetailDto();
         $userId = $this->getIdFromRequest();
         $this->populateDetailDto($dto,$userId);
-        $dto->status = $dto->getStatusCode();
-        $dto->avatar = $dto->getAvatarOrDefault();
-        $dto->roles = $dto->getRolesArray();
         $this->setResponseDto($dto);
     }
 
@@ -44,9 +41,7 @@ class DetailResponse extends AbstractResponse
         $repository = $this->getRepository(UserDetail::class);
         if($repository) {
             $data = $repository->getDetailData($userUuid);
-            if($data) {
-                $this->populateDto($dto, $data);
-            }
+            $this->populateDto($dto, $data);
         }
     }
 }

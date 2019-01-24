@@ -8,26 +8,26 @@
 
 namespace Sf4\ApiUser\Dto\Response;
 
-use Sf4\Api\Dto\DtoInterface;
+use Sf4\Api\Dto\AbstractDto;
 
-class DetailDto implements DtoInterface
+class DetailDto extends AbstractDto
 {
     const STATUS_ACTIVE = 'active';
     const STATUS_INACTIVE = 'inactive';
 
-    public $id;
+    protected $id;
 
-    public $email;
+    protected $email;
 
-    public $roles;
+    protected $roles;
 
-    public $firstName;
+    protected $firstName;
 
-    public $lastName;
+    protected $lastName;
 
-    public $avatar;
+    protected $avatar;
 
-    public $status;
+    protected $status;
 
     public function getStatusCode()
     {
@@ -46,5 +46,15 @@ class DetailDto implements DtoInterface
     public function getRolesArray(): ?array
     {
         return json_decode($this->roles);
+    }
+
+    public function toArray(): array
+    {
+        $data = parent::toArray();
+        $data['status'] = $this->getStatusCode();
+        $data['avatar'] = $this->getAvatarOrDefault();
+        $data['roles'] = $this->getRolesArray();
+
+        return $data;
     }
 }
