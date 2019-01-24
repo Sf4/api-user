@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sf4\Api\Entity\EntityInterface;
 use Sf4\Api\Entity\Traits\EntityIdTrait;
 use Sf4\Api\Entity\Traits\StatusTrait;
-use Sf4\Api\Entity\Traits\TimestampableTrait;
+use Sf4\ApiUser\Entity\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity(repositoryClass="Sf4\ApiUser\Repository\UserRepository")
