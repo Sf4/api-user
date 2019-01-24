@@ -33,8 +33,25 @@ $ composer require sf4/api-user
 
 ## Usage
 
+config/packages/doctrine.yaml
+``` yaml
+doctrine:
+    # ...
+    orm:
+        # ...
+        mappings:
+            # ...
+            Sf4\ApiUser:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/vendor/sf4/api-user/src/Entity'
+                prefix: 'Sf4\ApiUser\Entity'
+                alias: Sf4\ApiUser
+```
+
 config/routes.yaml
 ``` yaml
+# ...
 api_user:
     resource: '../vendor/sf4/api-user/src/Routes/api-user.yaml'
     prefix: /user
@@ -43,15 +60,13 @@ api_user:
 config/services.yaml
 ``` yaml
 services:
-
-# ...
-
+    # ...
     Sf4\Api\RequestHandler\RequestHandlerInterface:
-# ...
+        # ...
         -   method: setAvailableRoutes
             arguments:
                 -   api_default: 'Sf4\Api\Request\DefaultRequest'
-# ...
+                    # ...
                     api_user_detail: 'Sf4\ApiUser\Request\DetailRequest'
 ```
 
