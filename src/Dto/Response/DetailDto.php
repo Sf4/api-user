@@ -42,4 +42,9 @@ class DetailDto implements DtoInterface
 
         return $this->avatar;
     }
+
+    public function getRolesArray(): ?array
+    {
+        return json_decode($this->roles);
+    }
 }

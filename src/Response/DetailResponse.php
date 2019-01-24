@@ -23,7 +23,7 @@ class DetailResponse extends AbstractResponse
         $this->populateDetailDto($dto,$userId);
         $dto->status = $dto->getStatusCode();
         $dto->avatar = $dto->getAvatarOrDefault();
-        $dto->roles = json_decode($dto->roles);
+        $dto->roles = $dto->getRolesArray();
         $this->setResponseDto($dto);
     }
 
