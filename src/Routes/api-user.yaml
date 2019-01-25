@@ -1,3 +1,7 @@
 api_user_detail:
     path: /detail/{id}/{token}
     methods: [GET, OPTIONS]
+
+api_user_list:
+    path: /list/{token}
+    methods: [GET, POST, OPTIONS]

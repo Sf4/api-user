@@ -67,6 +67,7 @@ services:
             arguments:
                 -   api_default: 'Sf4\Api\Request\DefaultRequest'
                     # ...
+                    api_user_list: 'Sf4\ApiUser\Request\ListRequest'
                     api_user_detail: 'Sf4\ApiUser\Request\DetailRequest'
 ```
 
