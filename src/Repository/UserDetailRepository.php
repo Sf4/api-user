@@ -43,14 +43,14 @@ class UserDetailRepository extends AbstractRepository
         return $this->getSingleArrayResult($qb);
     }
 
-    public function getListData(ListFilter $filter): ?array
+    public function getListData(ListFilter $filter = null): ?array
     {
         $qb = $this->createUserQueryBuilder();
         $this->addFilterQuery($qb, $filter);
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getListDataCount(ListFilter $filter)
+    public function getListDataCount(ListFilter $filter = null)
     {
         $qb = $this->createUserQueryBuilder();
         $this->addFilterQuery($qb, $filter);
@@ -68,8 +68,11 @@ class UserDetailRepository extends AbstractRepository
         return $response;
     }
 
-    public function addFilterQuery(QueryBuilder $queryBuilder, ListFilter $filter)
+    public function addFilterQuery(QueryBuilder $queryBuilder, ListFilter $filter = null)
     {
+        if(!$filter) {
+            return ;
+        }
         FilterQueryBuilder::buildQuery($queryBuilder, $filter->getId(), 'u.uuid');
         FilterQueryBuilder::buildQuery($queryBuilder, $filter->getEmail(), 'u.email');
         FilterQueryBuilder::buildQuery($queryBuilder, $filter->getStatus(), 'u.status');

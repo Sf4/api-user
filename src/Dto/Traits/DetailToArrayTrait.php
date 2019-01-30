@@ -19,9 +19,8 @@ trait DetailToArrayTrait
     /**
      * @return array
      */
-    public function detailToArray(): array
+    public function detailToArray(array $data): array
     {
-        $data = $this->toArray();
         $data['status_code'] = $this->getStatusCode();
         $data['default_avatar'] = $this->getAvatarOrDefault();
         if(false === is_array($data['roles'])) {

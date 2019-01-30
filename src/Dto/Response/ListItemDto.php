@@ -19,6 +19,7 @@ class ListItemDto extends AbstractDto
 
     public function toArray(): array
     {
-        return $this->detailToArray();
+        $data = parent::toArray();
+        return $this->detailToArray($data);
     }
 }

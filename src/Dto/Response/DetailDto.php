@@ -19,6 +19,6 @@ class DetailDto extends AbstractDto implements DetailDtoInterface
 
     public function toArray(): array
     {
-        return $this->detailToArray();
+        return $this->detailToArray(parent::toArray());
     }
 }
