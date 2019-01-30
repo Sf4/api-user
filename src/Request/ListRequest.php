@@ -9,6 +9,7 @@
 namespace Sf4\ApiUser\Request;
 
 use Sf4\Api\Request\AbstractRequest;
+use Sf4\ApiUser\Dto\Request\ListDto;
 use Sf4\ApiUser\Response\ListResponse;
 
 class ListRequest extends AbstractRequest
@@ -18,7 +19,8 @@ class ListRequest extends AbstractRequest
     public function __construct()
     {
         $this->init(
-            new ListResponse()
+            new ListResponse(),
+            new ListDto()
         );
     }
 }
