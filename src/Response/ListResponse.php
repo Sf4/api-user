@@ -42,7 +42,7 @@ class ListResponse extends AbstractResponse
         $dto->setCount($repository->getListDataCount($filter));
 
         if($filter) {
-            $dto->setFilter($filter->toArray());
+            $dto->setFilter($filter);
         }
     }
 }
