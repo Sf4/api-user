@@ -8,28 +8,27 @@
 
 namespace Sf4\ApiUser\Repository;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Sf4\Api\Dto\Filter\FilterQueryBuilder;
 use Sf4\Api\Dto\Order\OrderInterface;
 use Sf4\Api\Repository\AbstractRepository;
+use Sf4\Api\Repository\Traits\ListTrait;
 use Sf4\ApiUser\Dto\Filter\ListFilter;
 use Sf4\ApiUser\Dto\Order\ListOrder;
 use Sf4\ApiUser\Entity\User;
 
 class UserDetailRepository extends AbstractRepository
 {
+    use ListTrait;
+
     const TABLE_NAME = 'user_detail';
 
-    const FIELD_ID = 'u.id';
-    const FIELD_UUID = 'u.uuid';
-    const FIELD_EMAIL = 'u.email';
-    const FIELD_STATUS = 'u.status';
-    const FIELD_ROLES = 'u.roles';
-    const FIELD_DELETED = 'u.deleted_at';
+    const FIELD_ID = 'main.id';
+    const FIELD_UUID = 'main.uuid';
+    const FIELD_EMAIL = 'main.email';
+    const FIELD_STATUS = 'main.status';
+    const FIELD_ROLES = 'main.roles';
+    const FIELD_DELETED = 'main.deleted_at';
     const FIELD_FIRST_NAME = 'd.firstName';
     const FIELD_LAST_NAME = 'd.lastName';
     const FIELD_AVATAR = 'd.avatar';
@@ -59,7 +58,7 @@ class UserDetailRepository extends AbstractRepository
     protected function createUserQueryBuilder(): QueryBuilder
     {
         $qb = $this->createQueryBuilder('d');
-        $qb->join(User::class, 'u', 'WITH', 'u.userDetail = d.id');
+        $qb->join(User::class, 'main', 'WITH', 'main.userDetail = d.id');
         $qb->select([
             static::FIELD_UUID . ' AS id', static::FIELD_EMAIL, static::FIELD_ROLES, static::FIELD_STATUS,
             static::FIELD_FIRST_NAME, static::FIELD_LAST_NAME, static::FIELD_AVATAR
@@ -68,29 +67,7 @@ class UserDetailRepository extends AbstractRepository
         return $qb;
     }
 
-    protected function getSingleArrayResult(QueryBuilder $qb): ?array
-    {
-        $response = null;
-        try {
-            $response = $qb->getQuery()->getSingleResult(Query::HYDRATE_ARRAY);
-        } catch (NoResultException $e) {
-            $response = null;
-        } catch (NonUniqueResultException $e) {
-            $response = null;
-        }
-
-        return $response;
-    }
-
-    public function getListData(ListFilter $filter = null, ArrayCollection $orders = null): ?array
-    {
-        $qb = $this->createUserQueryBuilder();
-        $this->addFilterQuery($qb, $filter);
-        $this->addOrdersQuery($qb, $orders);
-        return $qb->getQuery()->getArrayResult();
-    }
-
-    public function addFilterQuery(QueryBuilder $queryBuilder, ListFilter $filter = null)
+    protected function addFilterQuery(QueryBuilder $queryBuilder, ListFilter $filter = null)
     {
         if (!$filter) {
             return;
@@ -104,18 +81,7 @@ class UserDetailRepository extends AbstractRepository
         FilterQueryBuilder::buildQuery($queryBuilder, $filter->getAvatar(), static::FIELD_AVATAR);
     }
 
-    public function addOrdersQuery(QueryBuilder $queryBuilder, ArrayCollection $oders = null)
-    {
-        if (!$oders) {
-            return;
-        }
-        /** @var OrderInterface $oder */
-        foreach ($oders as $oder) {
-            $this->addOrderQuery($queryBuilder, $oder);
-        }
-    }
-
-    public function addOrderQuery(QueryBuilder $queryBuilder, OrderInterface $order)
+    protected function addOrderQuery(QueryBuilder $queryBuilder, OrderInterface $order)
     {
         switch ($order->getField()) {
             case ListOrder::FIELD_ID:
@@ -139,22 +105,8 @@ class UserDetailRepository extends AbstractRepository
         $queryBuilder->addOrderBy($sort, $order->getDirection());
     }
 
-    public function getListDataCount(ListFilter $filter = null, ArrayCollection $orders = null)
+    protected function createListQueryBuilder(): QueryBuilder
     {
-        $qb = $this->createUserQueryBuilder();
-        $this->addFilterQuery($qb, $filter);
-        $this->addOrdersQuery($qb, $orders);
-        $qb->select(
-            $qb->expr()->count(static::FIELD_ID)
-        );
-
-        try {
-            $response = $qb->getQuery()->getSingleResult(Query::HYDRATE_SINGLE_SCALAR);
-        } catch (NoResultException $e) {
-            $response = 0;
-        } catch (NonUniqueResultException $e) {
-            $response = 0;
-        }
-        return $response;
+        return $this->createUserQueryBuilder();
     }
 }
