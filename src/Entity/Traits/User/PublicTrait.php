@@ -1,0 +1,48 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: siim
+ * Date: 1.02.19
+ * Time: 9:10
+ */
+
+namespace Sf4\ApiUser\Entity\Traits\User;
+
+trait PublicTrait
+{
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    protected $roles;
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        // guarantee every user at least has ROLE_USER
+        $this->roles[] = 'ROLE_USER';
+
+        return array_unique($this->roles);
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+}

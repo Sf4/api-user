@@ -14,4 +14,9 @@ use Sf4\ApiUser\Dto\Traits\DetailBaseTrait;
 class ListFilter extends AbstractFilter
 {
     use DetailBaseTrait;
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
 }

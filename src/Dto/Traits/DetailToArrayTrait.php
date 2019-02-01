@@ -14,16 +14,19 @@ use Sf4\ApiUser\Dto\Response\DetailDtoInterface;
 trait DetailToArrayTrait
 {
 
-    public abstract function toArray(): array;
+    abstract public function toArray(): array;
 
     /**
+     * @param array $data
      * @return array
      */
     public function detailToArray(array $data): array
     {
         $data['status_code'] = $this->getStatusCode();
-        $data['default_avatar'] = $this->getAvatarOrDefault();
-        if(false === is_array($data['roles'])) {
+        if (empty($data['avatar'])) {
+            $data['default_avatar'] = $this->getAvatarOrDefault();
+        }
+        if (false === is_array($data['roles'])) {
             $data['roles'] = $this->getRolesArray();
         }
         return $data;
@@ -31,12 +34,14 @@ trait DetailToArrayTrait
 
     public function getStatusCode()
     {
-        return $this->getStatus() == StatusSettingInterface::ACTIVE ? DetailDtoInterface::STATUS_CODE_ACTIVE : DetailDtoInterface::STATUS_CODE_INACTIVE;
+        $active = DetailDtoInterface::STATUS_CODE_ACTIVE;
+        $inactive = DetailDtoInterface::STATUS_CODE_INACTIVE;
+        return $this->getStatus() == StatusSettingInterface::ACTIVE ? $active : $inactive;
     }
 
     public function getAvatarOrDefault()
     {
-        if(empty($this->getAvatar())) {
+        if (empty($this->getAvatar())) {
             return 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';
         }
 
@@ -45,7 +50,7 @@ trait DetailToArrayTrait
 
     public function getRolesArray(): ?array
     {
-        if($this->getRoles() && false === is_array($this->getRoles())) {
+        if ($this->getRoles() && false === is_array($this->getRoles())) {
             return json_decode($this->getRoles());
         }
 

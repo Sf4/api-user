@@ -20,7 +20,7 @@ class DetailResponse extends AbstractResponse
     {
         $dto = new DetailDto();
         $userId = $this->getIdFromRequest();
-        $this->populateDetailDto($dto,$userId);
+        $this->populateDetailDto($dto, $userId);
         $this->setResponseDto($dto);
     }
 
@@ -39,7 +39,7 @@ class DetailResponse extends AbstractResponse
     {
         /** @var UserDetailRepository $repository */
         $repository = $this->getRepository(UserDetail::class);
-        if($repository) {
+        if ($repository) {
             $data = $repository->getDetailData($userUuid);
             $this->populateDto($dto, $data);
         }

@@ -31,17 +31,20 @@ class ListResponse extends AbstractResponse
     protected function populateListDto(ListDto $dto)
     {
         $filter = null;
+        $orders = null;
         /** @var \Sf4\ApiUser\Dto\Request\ListDto $requestDto */
-        if($requestDto = $this->getRequest()->getDto()) {
+        if ($requestDto = $this->getRequest()->getDto()) {
             /** @var ListFilter $filter */
             $filter = $requestDto->getFilter();
+            $orders = $requestDto->getOrders();
+            $dto->setOrders($orders);
         }
         /** @var UserDetailRepository $repository */
         $repository = $this->getRepository(UserDetail::class);
-        $this->populateDto($dto, $repository->getListData($filter));
-        $dto->setCount($repository->getListDataCount($filter));
+        $this->populateDto($dto, $repository->getListData($filter, $orders));
+        $dto->setCount($repository->getListDataCount($filter, $orders));
 
-        if($filter) {
+        if ($filter) {
             $dto->setFilter($filter);
         }
     }
