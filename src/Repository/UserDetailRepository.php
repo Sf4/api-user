@@ -39,7 +39,7 @@ class UserDetailRepository extends AbstractRepository implements UserFieldsInter
     const DB_FIELD_AVATAR = self::PREFIX_DETAIL . self::FIELD_AVATAR;
     const DB_FIELD_LAST_NAME = self::PREFIX_DETAIL . self::FIELD_LAST_NAME;
     const DB_FIELD_FIRST_NAME = self::PREFIX_DETAIL . self::FIELD_FIRST_NAME;
-    const DB_FIELD_USER_DETAIL = self::PREFIX_MAIN . self::DB_FIELD_USER_DETAIL;
+    const DB_FIELD_USER_DETAIL = self::PREFIX_MAIN . self::FIELD_USER_DETAIL;
 
     /**
      * @param $userUuid
