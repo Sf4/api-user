@@ -1,0 +1,20 @@
+user:
+    detail:
+        save:
+            success: 'User data has been saved successfully'
+            error: 'There was an error while saving user data'
+        validate:
+            invalid_entity: 'Technical error: Invalid entity'
+            not_blank:
+                email: 'Email should not be blank.'
+                status: 'Status should not be blank.'
+                first_name: 'First name should not be blank.'
+                last_name: 'Last name should not be blank.'
+            email:
+                email: 'This value is not a valid email address.'
+            min_length:
+                first_name: 'First name is too short. It should have {{ limit }} character or more.'
+                last_name: 'Last name is too short. It should have {{ limit }} character or more.'
+            regex:
+                first_name: 'First name is not valid.'
+                last_name: 'Last name is not valid.'

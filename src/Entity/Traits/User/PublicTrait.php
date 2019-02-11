@@ -10,14 +10,8 @@ namespace Sf4\ApiUser\Entity\Traits\User;
 
 trait PublicTrait
 {
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
     protected $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
     protected $roles;
 
     public function getEmail()
@@ -35,10 +29,11 @@ trait PublicTrait
      */
     public function getRoles(): array
     {
-        // guarantee every user at least has ROLE_USER
-        $this->roles[] = 'ROLE_USER';
+        if (false === in_array('ROLE_USER', $this->roles)) {
+            $this->roles[] = 'ROLE_USER';
+        }
 
-        return array_unique($this->roles);
+        return $this->roles;
     }
 
     public function setRoles($roles)

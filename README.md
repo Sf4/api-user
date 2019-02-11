@@ -69,6 +69,18 @@ services:
                     # ...
                     api_user_list: 'Sf4\ApiUser\Request\ListRequest'
                     api_user_detail: 'Sf4\ApiUser\Request\DetailRequest'
+                    api_user_save_detail: 'Sf4\ApiUser\Request\SaveDetailRequest'
+```
+
+config/packages/translation.yaml
+```
+framework:
+    # ...
+    translator:
+        # ...
+        paths:
+            # ...
+            - '%kernel.project_dir%/vendor/sf4/api-user/src/translations'
 ```
 
 ## Change log

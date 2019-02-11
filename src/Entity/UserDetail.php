@@ -16,8 +16,23 @@ use Sf4\ApiUser\Entity\Traits\UserDetail\PublicTrait;
 /**
  * @ORM\Entity(repositoryClass="Sf4\ApiUser\Repository\UserDetailRepository")
  */
-class UserDetail implements EntityInterface
+class UserDetail implements EntityInterface, UserDetailFieldInterface
 {
     use EntityIdTrait;
     use PublicTrait;
+
+    /**
+     * @ORM\Column(type="string", length=100, options={"default" : ""})
+     */
+    protected $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=100, options={"default" : ""})
+     */
+    protected $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : ""})
+     */
+    protected $avatar;
 }

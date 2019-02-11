@@ -10,19 +10,10 @@ namespace Sf4\ApiUser\Entity\Traits\UserDetail;
 
 trait PublicTrait
 {
-    /**
-     * @ORM\Column(type="string", length=100, options={"default" : ""})
-     */
     protected $firstName;
 
-    /**
-     * @ORM\Column(type="string", length=100, options={"default" : ""})
-     */
     protected $lastName;
 
-    /**
-     * @ORM\Column(type="string", length=255, options={"default" : ""})
-     */
     protected $avatar;
 
     public function getFullName()

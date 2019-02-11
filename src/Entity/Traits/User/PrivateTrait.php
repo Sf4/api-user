@@ -8,6 +8,8 @@
 
 namespace Sf4\ApiUser\Entity\Traits\User;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait PrivateTrait
 {
     /**

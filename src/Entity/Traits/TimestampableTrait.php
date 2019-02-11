@@ -9,6 +9,7 @@
 namespace Sf4\ApiUser\Entity\Traits;
 
 use Sf4\ApiUser\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
 
 trait TimestampableTrait
 {
@@ -18,7 +19,7 @@ trait TimestampableTrait
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\User")
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $created_by;
 
@@ -28,7 +29,7 @@ trait TimestampableTrait
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\User")
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $updated_by;
 
@@ -38,7 +39,7 @@ trait TimestampableTrait
     private $deleted_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\User")
+     * @ORM\ManyToOne(targetEntity="User")
      */
     private $deleted_by;
 

@@ -22,6 +22,19 @@ trait UserTrait
     use PublicTrait;
     use PrivateTrait;
 
+    /** @ORM\Column(type="string", length=180, unique=true) */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    protected $roles;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected $status;
+
     /**
      * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\UserDetail", cascade={"persist"})
      */

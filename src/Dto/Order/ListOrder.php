@@ -9,14 +9,11 @@
 namespace Sf4\ApiUser\Dto\Order;
 
 use Sf4\Api\Dto\Order\AbstractOrder;
+use Sf4\ApiUser\Entity\UserDetailFieldInterface;
+use Sf4\ApiUser\Entity\UserFieldsInterface;
 
-class ListOrder extends AbstractOrder
+class ListOrder extends AbstractOrder implements UserFieldsInterface, UserDetailFieldInterface
 {
-    const FIELD_ID = 'id';
-    const FIELD_EMAIL = 'email';
-    const FIELD_FIRST_NAME = 'firstName';
-    const FIELD_LAST_NAME = 'lastName';
-    const FIELD_STATUS = 'status';
 
     public function getAvailableFields(): array
     {
