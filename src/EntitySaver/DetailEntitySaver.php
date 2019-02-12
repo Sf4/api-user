@@ -14,14 +14,16 @@ use Sf4\Api\EntitySaver\AbstractEntitySaver;
 use Sf4\Api\Notification\BaseErrorMessage;
 use Sf4\Api\Notification\BaseNotification;
 use Sf4\Api\Notification\NotificationInterface;
+use Sf4\Api\Utils\Traits\SerializerTrait;
 use Sf4\ApiUser\Entity\User;
 use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\EntityValidator\DetailEntityValidator;
-use Sf4\Populator\Populator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class DetailEntitySaver extends AbstractEntitySaver
 {
+
+    use SerializerTrait;
 
     const MESSAGE_INVALID_ENTITY = 'user.detail.validate.invalid_entity';
 
@@ -32,13 +34,9 @@ class DetailEntitySaver extends AbstractEntitySaver
             $userDetail = $entity->getUserDetail();
 
             $data = $requestDto->toArray();
-            $populator = new Populator();
-            try {
-                $populator->populate($data, $entity);
-                $populator->populate($data, $userDetail);
-            } catch (\ReflectionException $e) {
-                return ;
-            }
+
+            $this->populateObject($data, $entity);
+            $this->populateObject($data, $userDetail);
         }
     }
 
