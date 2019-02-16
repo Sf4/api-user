@@ -16,7 +16,7 @@ use Sf4\ApiUser\Entity\Traits\UserDetail\PublicTrait;
 /**
  * @ORM\Entity(repositoryClass="Sf4\ApiUser\Repository\UserDetailRepository")
  */
-class UserDetail implements EntityInterface, UserDetailFieldInterface
+class UserDetail implements EntityInterface, UserDetailInterface, UserDetailFieldInterface
 {
     use EntityIdTrait;
     use PublicTrait;

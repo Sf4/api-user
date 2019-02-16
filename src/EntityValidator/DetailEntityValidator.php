@@ -10,9 +10,9 @@ namespace Sf4\ApiUser\EntityValidator;
 
 use Sf4\Api\Entity\EntityInterface;
 use Sf4\Api\EntityValidator\AbstractEntityValidator;
-use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\Entity\UserDetailFieldInterface;
 use Sf4\ApiUser\Entity\User;
+use Sf4\ApiUser\Entity\UserDetailInterface;
 use Sf4\ApiUser\Entity\UserFieldsInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
@@ -47,7 +47,7 @@ class DetailEntityValidator extends AbstractEntityValidator implements UserField
             $userRules = $this->getUserValidationRules($entity);
             $userDetail = $entity->getUserDetail();
             $rules = array_merge($rules, $userRules);
-            if ($userDetail instanceof UserDetail) {
+            if ($userDetail instanceof UserDetailInterface) {
                 $userDetailRules = $this->getUserDetailValidationRules($userDetail);
                 $rules = array_merge($rules, $userDetailRules);
             }
@@ -92,10 +92,10 @@ class DetailEntityValidator extends AbstractEntityValidator implements UserField
     }
 
     /**
-     * @param UserDetail $userDetail
+     * @param UserDetailInterface $userDetail
      * @return array
      */
-    protected function getUserDetailValidationRules(UserDetail $userDetail): array
+    protected function getUserDetailValidationRules(UserDetailInterface $userDetail): array
     {
         return [
             static::FIELD_FIRST_NAME => [

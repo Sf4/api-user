@@ -18,7 +18,7 @@ use Sf4\ApiUser\Entity\Traits\UserTrait;
  *     @ORM\Index(name="email_idx", columns={"email"})
  * })
  */
-class User implements EntityInterface, UserFieldsInterface
+class User implements EntityInterface, UserInterface, UserFieldsInterface
 {
     use UserTrait;
 }

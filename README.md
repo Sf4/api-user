@@ -61,6 +61,16 @@ config/services.yaml
 ``` yaml
 services:
     # ...
+    
+    Sf4\Api\Repository\RepositoryFactory:
+        class: Sf4\Api\Repository\RepositoryFactory
+        arguments:
+            $entityManager: '@Doctrine\ORM\EntityManagerInterface'
+            $entities:
+                user: Sf4\ApiUser\Entity\User
+                user_detail: Sf4\ApiUser\Entity\UserDetail
+
+    # ...
     Sf4\Api\RequestHandler\RequestHandlerInterface:
         # ...
         -   method: setAvailableRoutes

@@ -10,7 +10,6 @@ namespace Sf4\ApiUser\Response;
 
 use Sf4\Api\Response\AbstractResponse;
 use Sf4\ApiUser\Dto\Response\DetailDto;
-use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\Repository\UserDetailRepository;
 
 class DetailResponse extends AbstractResponse
@@ -37,8 +36,9 @@ class DetailResponse extends AbstractResponse
      */
     protected function populateDetailDto(DetailDto $dto, $userUuid)
     {
+        $repositoryFactory = $this->getRequest()->getRequestHandler()->getRepositoryFactory();
         /** @var UserDetailRepository $repository */
-        $repository = $this->getRepository(UserDetail::class);
+        $repository = $repositoryFactory->create(UserDetailRepository::TABLE_NAME);
         if ($repository) {
             $data = $repository->getDetailData($userUuid);
             $this->populateDto($dto, $data);

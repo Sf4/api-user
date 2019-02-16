@@ -16,7 +16,7 @@ use Sf4\Api\Notification\BaseNotification;
 use Sf4\Api\Notification\NotificationInterface;
 use Sf4\Api\Utils\Traits\SerializerTrait;
 use Sf4\ApiUser\Entity\User;
-use Sf4\ApiUser\Entity\UserDetail;
+use Sf4\ApiUser\Entity\UserDetailInterface;
 use Sf4\ApiUser\EntityValidator\DetailEntityValidator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -30,7 +30,7 @@ class DetailEntitySaver extends AbstractEntitySaver
     protected function populateEntity(EntityInterface $entity, DtoInterface $requestDto)
     {
         if ($entity instanceof User) {
-            /** @var UserDetail $userDetail */
+            /** @var UserDetailInterface $userDetail */
             $userDetail = $entity->getUserDetail();
 
             $data = $requestDto->toArray();
