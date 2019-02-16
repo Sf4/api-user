@@ -15,8 +15,8 @@ use Sf4\Api\Notification\BaseErrorMessage;
 use Sf4\Api\Notification\BaseNotification;
 use Sf4\Api\Notification\NotificationInterface;
 use Sf4\Api\Utils\Traits\SerializerTrait;
-use Sf4\ApiUser\Entity\User;
 use Sf4\ApiUser\Entity\UserDetailInterface;
+use Sf4\ApiUser\Entity\UserInterface;
 use Sf4\ApiUser\EntityValidator\DetailEntityValidator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -29,7 +29,7 @@ class DetailEntitySaver extends AbstractEntitySaver
 
     protected function populateEntity(EntityInterface $entity, DtoInterface $requestDto)
     {
-        if ($entity instanceof User) {
+        if ($entity instanceof UserInterface) {
             /** @var UserDetailInterface $userDetail */
             $userDetail = $entity->getUserDetail();
 
@@ -43,7 +43,7 @@ class DetailEntitySaver extends AbstractEntitySaver
     protected function validate(EntityInterface $entity, ValidatorInterface $validator): NotificationInterface
     {
         $notification = new BaseNotification();
-        if ($entity instanceof User) {
+        if ($entity instanceof UserInterface) {
             $entityValidator = new DetailEntityValidator();
             $entityValidator->setTranslator($this->getResponse()->getRequest()->getRequestHandler()->getTranslator());
             $entityValidator->validate($entity, $validator, $notification);

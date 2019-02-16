@@ -16,6 +16,7 @@ use Sf4\Api\Repository\AbstractRepository;
 use Sf4\Api\Repository\Traits\ListTrait;
 use Sf4\ApiUser\Dto\Filter\ListFilter;
 use Sf4\ApiUser\Entity\User;
+use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\Entity\UserDetailFieldInterface;
 use Sf4\ApiUser\Entity\UserFieldsInterface;
 
@@ -40,6 +41,16 @@ class UserDetailRepository extends AbstractRepository implements UserFieldsInter
     const DB_FIELD_LAST_NAME = self::PREFIX_DETAIL . self::FIELD_LAST_NAME;
     const DB_FIELD_FIRST_NAME = self::PREFIX_DETAIL . self::FIELD_FIRST_NAME;
     const DB_FIELD_USER_DETAIL = self::PREFIX_MAIN . self::FIELD_USER_DETAIL;
+
+    protected function getEntityClass(): string
+    {
+        return UserDetail::class;
+    }
+
+    protected function getUserEntityClass(): string
+    {
+        return User::class;
+    }
 
     /**
      * @param $userUuid
@@ -67,7 +78,7 @@ class UserDetailRepository extends AbstractRepository implements UserFieldsInter
     {
         $qb = $this->createQueryBuilder(static::ALIAS_DETAIL);
         $qb->join(
-            User::class,
+            $this->getUserEntityClass(),
             static::ALIAS_MAIN,
             Join::WITH,
             static::DB_FIELD_USER_DETAIL . '=' . static::DB_DETAIL_ID

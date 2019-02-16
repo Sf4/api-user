@@ -11,7 +11,6 @@ namespace Sf4\ApiUser\Response;
 use Sf4\Api\Response\AbstractResponse;
 use Sf4\ApiUser\Dto\Filter\ListFilter;
 use Sf4\ApiUser\Dto\Response\ListDto;
-use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\Repository\UserDetailRepository;
 
 class ListResponse extends AbstractResponse
@@ -39,8 +38,9 @@ class ListResponse extends AbstractResponse
             $orders = $requestDto->getOrders();
             $dto->setOrders($orders);
         }
+
         /** @var UserDetailRepository $repository */
-        $repository = $this->getRepository(UserDetail::class);
+        $repository = $this->getRepository(UserDetailRepository::TABLE_NAME);
         $this->populateDto($dto, $repository->getListData($filter, $orders));
         $dto->setCount($repository->getListDataCount($filter, $orders));
 

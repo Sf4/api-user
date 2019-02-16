@@ -12,7 +12,7 @@ use Sf4\Api\Entity\Traits\EntityIdTrait;
 use Sf4\Api\Entity\Traits\StatusTrait;
 use Sf4\ApiUser\Entity\Traits\User\PrivateTrait;
 use Sf4\ApiUser\Entity\Traits\User\PublicTrait;
-use Sf4\ApiUser\Entity\UserDetail;
+use Sf4\ApiUser\Entity\UserDetailInterface;
 
 trait UserTrait
 {
@@ -48,17 +48,12 @@ trait UserTrait
         return (string)$this->email;
     }
 
-    public function getUserDetail(): ?UserDetail
+    public function getUserDetail(): ?UserDetailInterface
     {
-        if ($this->userDetail === null) {
-            $this->userDetail = new UserDetail();
-            $this->userDetail->createNewToken();
-        }
-
         return $this->userDetail;
     }
 
-    public function setUserDetail(?UserDetail $userDetail): self
+    public function setUserDetail(?UserDetailInterface $userDetail): self
     {
         $this->userDetail = $userDetail;
 

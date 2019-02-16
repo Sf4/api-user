@@ -12,6 +12,7 @@ use Sf4\Api\Dto\Response\BaseSaveDto;
 use Sf4\Api\Response\AbstractSaveResponse;
 use Sf4\ApiUser\Entity\User;
 use Sf4\ApiUser\EntitySaver\DetailEntitySaver;
+use Sf4\ApiUser\Repository\UserRepository;
 
 class SaveDetailResponse extends AbstractSaveResponse
 {
@@ -24,6 +25,16 @@ class SaveDetailResponse extends AbstractSaveResponse
 
     protected function getEntityClass(): string
     {
+        $request = $this->getRequest();
+        if ($request) {
+            $entityClass = $request->getRequestHandler()->getRepositoryFactory()->getEntityClass(
+                UserRepository::TABLE_NAME
+            );
+            if ($entityClass) {
+                return $entityClass;
+            }
+        }
+
         return User::class;
     }
 

@@ -8,7 +8,7 @@
 
 namespace Sf4\ApiUser\Entity\Traits;
 
-use Sf4\ApiUser\Entity\User;
+use Sf4\ApiUser\Entity\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 trait TimestampableTrait
@@ -55,12 +55,12 @@ trait TimestampableTrait
         return $this;
     }
 
-    public function getCreatedBy(): ?self
+    public function getCreatedBy(): ?UserInterface
     {
         return $this->created_by;
     }
 
-    public function setCreatedBy(?User $created_by): self
+    public function setCreatedBy(?UserInterface $created_by): self
     {
         $this->created_by = $created_by;
 
@@ -79,12 +79,12 @@ trait TimestampableTrait
         return $this;
     }
 
-    public function getUpdatedBy(): ?self
+    public function getUpdatedBy(): ?UserInterface
     {
         return $this->updated_by;
     }
 
-    public function setUpdatedBy(?User $updated_by): self
+    public function setUpdatedBy(?UserInterface $updated_by): self
     {
         $this->updated_by = $updated_by;
 
@@ -103,12 +103,12 @@ trait TimestampableTrait
         return $this;
     }
 
-    public function getDeletedBy(): ?self
+    public function getDeletedBy(): ?UserInterface
     {
         return $this->deleted_by;
     }
 
-    public function setDeletedBy(?User $deleted_by): self
+    public function setDeletedBy(?UserInterface $deleted_by): self
     {
         $this->deleted_by = $deleted_by;
 

@@ -36,9 +36,8 @@ class DetailResponse extends AbstractResponse
      */
     protected function populateDetailDto(DetailDto $dto, $userUuid)
     {
-        $repositoryFactory = $this->getRequest()->getRequestHandler()->getRepositoryFactory();
         /** @var UserDetailRepository $repository */
-        $repository = $repositoryFactory->create(UserDetailRepository::TABLE_NAME);
+        $repository = $this->getRepository(UserDetailRepository::TABLE_NAME);
         if ($repository) {
             $data = $repository->getDetailData($userUuid);
             $this->populateDto($dto, $data);
