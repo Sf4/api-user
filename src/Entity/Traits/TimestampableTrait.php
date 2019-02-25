@@ -43,75 +43,99 @@ trait TimestampableTrait
      */
     private $deleted_by;
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    /**
+     * @param \DateTimeInterface|null $created_at
+     */
+    public function setCreatedAt(?\DateTimeInterface $created_at)
     {
         $this->created_at = $created_at;
-
-        return $this;
     }
 
+    /**
+     * @return UserInterface|null
+     */
     public function getCreatedBy(): ?UserInterface
     {
         return $this->created_by;
     }
 
-    public function setCreatedBy(?UserInterface $created_by): self
+    /**
+     * @param UserInterface|null $created_by
+     */
+    public function setCreatedBy(?UserInterface $created_by)
     {
         $this->created_by = $created_by;
-
-        return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    /**
+     * @param \DateTimeInterface|null $updated_at
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updated_at)
     {
         $this->updated_at = $updated_at;
-
-        return $this;
     }
 
+    /**
+     * @return UserInterface|null
+     */
     public function getUpdatedBy(): ?UserInterface
     {
         return $this->updated_by;
     }
 
-    public function setUpdatedBy(?UserInterface $updated_by): self
+    /**
+     * @param UserInterface|null $updated_by
+     */
+    public function setUpdatedBy(?UserInterface $updated_by)
     {
         $this->updated_by = $updated_by;
-
-        return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDeletedAt(): ?\DateTimeInterface
     {
         return $this->deleted_at;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deleted_at): self
+    /**
+     * @param \DateTimeInterface|null $deleted_at
+     */
+    public function setDeletedAt(?\DateTimeInterface $deleted_at)
     {
         $this->deleted_at = $deleted_at;
-
-        return $this;
     }
 
+    /**
+     * @return UserInterface|null
+     */
     public function getDeletedBy(): ?UserInterface
     {
         return $this->deleted_by;
     }
 
-    public function setDeletedBy(?UserInterface $deleted_by): self
+    /**
+     * @param UserInterface|null $deleted_by
+     */
+    public function setDeletedBy(?UserInterface $deleted_by)
     {
         $this->deleted_by = $deleted_by;
-
-        return $this;
     }
 }

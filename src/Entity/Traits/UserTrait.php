@@ -48,15 +48,19 @@ trait UserTrait
         return (string)$this->email;
     }
 
+    /**
+     * @return UserDetailInterface|null
+     */
     public function getUserDetail(): ?UserDetailInterface
     {
         return $this->userDetail;
     }
 
-    public function setUserDetail(?UserDetailInterface $userDetail): self
+    /**
+     * @param UserDetailInterface|null $userDetail
+     */
+    public function setUserDetail(?UserDetailInterface $userDetail)
     {
         $this->userDetail = $userDetail;
-
-        return $this;
     }
 }

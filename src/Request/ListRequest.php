@@ -9,6 +9,7 @@
 namespace Sf4\ApiUser\Request;
 
 use Sf4\Api\Request\AbstractRequest;
+use Sf4\ApiUser\CacheAdapter\CacheKeysInterface;
 use Sf4\ApiUser\Dto\Request\ListDto;
 use Sf4\ApiUser\Response\ListResponse;
 
@@ -22,5 +23,18 @@ class ListRequest extends AbstractRequest
             new ListResponse(),
             new ListDto()
         );
+    }
+
+    /**
+     * @param \Closure $closure
+     * @param string|null $cacheKey
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
+    public function getCachedResponse(\Closure $closure, string $cacheKey = null)
+    {
+        if (null === $cacheKey) {
+            $cacheKey = CacheKeysInterface::KEY_USER_LIST;
+        }
+        parent::getCachedResponse($closure, $cacheKey);
     }
 }
