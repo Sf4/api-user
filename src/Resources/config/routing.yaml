@@ -1,0 +1,11 @@
+sf4_api_user_detail:
+    path: /detail/{id}/{token}
+    methods: [GET, OPTIONS]
+
+sf4_api_user_list:
+    path: /list/{token}
+    methods: [GET, POST, OPTIONS]
+
+sf4_api_user_save_detail:
+    path: /save/{id}/{token}
+    methods: [POST, OPTIONS]

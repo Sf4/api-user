@@ -14,7 +14,7 @@ use Sf4\ApiUser\Response\DetailResponse;
 
 class DetailRequest extends AbstractRequest
 {
-    const ROUTE = 'api_user_detail';
+    const ROUTE = 'sf4_api_user_detail';
 
     public function __construct()
     {
@@ -26,15 +26,30 @@ class DetailRequest extends AbstractRequest
     /**
      * @param \Closure $closure
      * @param string|null $cacheKey
+     * @param array $tags
+     * @param int|null $expiresAfter
+     * @throws \Psr\Cache\CacheException
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function getCachedResponse(\Closure $closure, string $cacheKey = null)
-    {
+    public function getCachedResponse(
+        \Closure $closure,
+        string $cacheKey = null,
+        array $tags = [],
+        int $expiresAfter = null
+    ) {
         if (null === $cacheKey) {
             $request = $this->getRequest();
             $id = $request->attributes->get('id');
             $cacheKey = CacheKeysInterface::KEY_USER_DETAIL . $id;
         }
-        parent::getCachedResponse($closure, $cacheKey);
+        parent::getCachedResponse($closure, $cacheKey, $tags, $expiresAfter);
+    }
+
+    protected function getCacheTags(): array
+    {
+        return [
+            CacheKeysInterface::TAG_USER,
+            CacheKeysInterface::TAG_USER_DETAIL
+        ];
     }
 }

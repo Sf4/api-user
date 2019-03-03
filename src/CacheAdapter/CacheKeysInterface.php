@@ -13,6 +13,8 @@ interface CacheKeysInterface
     const KEY_USER_LIST = 'user_list_';
     const KEY_USER_LIST_ITEM = 'user_list_item_';
     const KEY_USER_DETAIL = 'user_detail_';
+    const KEY_USER_LIST_DATA = 'user_list_data_';
+    const KEY_USER_LIST_DATA_COUNT = 'user_list_data_count_';
 
     const TAG_USER = 'user';
     const TAG_USER_DETAIL = 'user_detail';

@@ -19,4 +19,17 @@ class ListFilter extends AbstractFilter
     {
         return $this->roles;
     }
+
+    public function toArray(): array
+    {
+        $data = [
+            'id' => $this->getId(),
+            'roles' => $this->getRoles(),
+            'status' => $this->getStatus(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName(),
+            'email' => $this->getEmail()
+        ];
+        return $this->filterDataToArray($data);
+    }
 }

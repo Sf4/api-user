@@ -15,7 +15,7 @@ use Sf4\ApiUser\Response\ListResponse;
 
 class ListRequest extends AbstractRequest
 {
-    const ROUTE = 'api_user_list';
+    const ROUTE = 'sf4_api_user_list';
 
     public function __construct()
     {
@@ -28,13 +28,28 @@ class ListRequest extends AbstractRequest
     /**
      * @param \Closure $closure
      * @param string|null $cacheKey
+     * @param array $tags
+     * @param int|null $expiresAfter
+     * @throws \Psr\Cache\CacheException
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function getCachedResponse(\Closure $closure, string $cacheKey = null)
-    {
+    public function getCachedResponse(
+        \Closure $closure,
+        string $cacheKey = null,
+        array $tags = [],
+        int $expiresAfter = null
+    ) {
         if (null === $cacheKey) {
             $cacheKey = CacheKeysInterface::KEY_USER_LIST;
         }
-        parent::getCachedResponse($closure, $cacheKey);
+        parent::getCachedResponse($closure, $cacheKey, $tags, $expiresAfter);
+    }
+
+    protected function getCacheTags(): array
+    {
+        return [
+            CacheKeysInterface::TAG_USER_LIST,
+            CacheKeysInterface::TAG_USER
+        ];
     }
 }
