@@ -1,0 +1,8 @@
+sf4_api_user_:
+    resource: '@Sf4ApiUserBundle/Resources/config/routing.yaml'
+    prefix: /user
+sf4_api_user_locale:
+    resource: '@Sf4ApiUserBundle/Resources/config/routing-locale.yaml'
+    prefix: /{_locale}/user
+    defaults:
+        _locale: '%locale%'

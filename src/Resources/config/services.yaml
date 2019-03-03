@@ -1,1 +1,3 @@
-
+services:
+    Sf4\ApiUser\Routing\ApiUserLoader:
+        tags: [routing.loader]

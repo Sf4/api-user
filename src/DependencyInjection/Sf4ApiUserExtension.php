@@ -8,6 +8,7 @@
 
 namespace Sf4\ApiUser\DependencyInjection;
 
+use Sf4\Api\DependencyInjection\Traits\Sf4ApiExtensionTrait;
 use Sf4\ApiUser\Entity\User;
 use Sf4\ApiUser\Entity\UserDetail;
 use Sf4\ApiUser\Repository\UserDetailRepository;
@@ -26,6 +27,8 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
     const SF4_API_BUNDLE = 'Sf4ApiBundle';
     const SF4_API_SECURITY_BUNDLE = 'Sf4ApiSecurityBundle';
     const SF4_API_USER = 'sf4_api_user';
+
+    use Sf4ApiExtensionTrait;
 
     /**
      * @param ContainerBuilder $container
@@ -57,6 +60,7 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $this->loadServices($container, __DIR__);
     }
 
     /**
