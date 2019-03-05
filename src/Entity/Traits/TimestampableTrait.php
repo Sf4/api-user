@@ -19,7 +19,7 @@ trait TimestampableTrait
     private $created_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\User")
      */
     private $created_by;
 
@@ -29,7 +29,7 @@ trait TimestampableTrait
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\User")
      */
     private $updated_by;
 
@@ -39,7 +39,7 @@ trait TimestampableTrait
     private $deleted_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\User")
      */
     private $deleted_by;
 
