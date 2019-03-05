@@ -15,6 +15,7 @@ use Sf4\Api\Notification\BaseErrorMessage;
 use Sf4\Api\Notification\BaseNotification;
 use Sf4\Api\Notification\NotificationInterface;
 use Sf4\Api\Utils\Traits\SerializerTrait;
+use Sf4\ApiUser\CacheAdapter\CacheKeysInterface;
 use Sf4\ApiUser\Entity\UserDetailInterface;
 use Sf4\ApiUser\Entity\UserInterface;
 use Sf4\ApiUser\EntityValidator\DetailEntityValidator;
@@ -27,6 +28,10 @@ class DetailEntitySaver extends AbstractEntitySaver
 
     const MESSAGE_INVALID_ENTITY = 'user.detail.validate.invalid_entity';
 
+    /**
+     * @param EntityInterface $entity
+     * @param DtoInterface $requestDto
+     */
     protected function populateEntity(EntityInterface $entity, DtoInterface $requestDto)
     {
         if ($entity instanceof UserInterface) {
@@ -40,6 +45,11 @@ class DetailEntitySaver extends AbstractEntitySaver
         }
     }
 
+    /**
+     * @param EntityInterface $entity
+     * @param ValidatorInterface $validator
+     * @return NotificationInterface
+     */
     protected function validate(EntityInterface $entity, ValidatorInterface $validator): NotificationInterface
     {
         $notification = new BaseNotification();
@@ -59,5 +69,22 @@ class DetailEntitySaver extends AbstractEntitySaver
         }
 
         return $notification;
+    }
+
+    /**
+     * @param EntityInterface $entity
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
+    protected function postEntitySave(EntityInterface $entity)
+    {
+        if ($entity instanceof UserInterface) {
+            $uuid = $entity->getUuid();
+            $cacheKey = CacheKeysInterface::KEY_USER_DETAIL . $uuid;
+            $this->getResponse()->getRequest()->getRequestHandler()->removeByKey($cacheKey);
+            $this->getResponse()->getRequest()->getRequestHandler()->removeByTag([
+                CacheKeysInterface::TAG_USER_DETAIL,
+                CacheKeysInterface::TAG_USER_LIST
+            ]);
+        }
     }
 }

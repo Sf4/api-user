@@ -76,7 +76,7 @@ class ListResponse extends AbstractResponse
         ArrayCollection $orders = null
     ) {
         $hash = $this->getFilterAndOrdersHash($filter, $orders);
-        $cacheKey = md5(CacheKeysInterface::KEY_USER_LIST_DATA . $hash);
+        $cacheKey = CacheKeysInterface::KEY_USER_LIST_DATA . $hash;
         return $this->getRequest()->getRequestHandler()->getCacheDataOrAdd(
             $cacheKey,
             function () use ($repository, $filter, $orders) {
@@ -105,7 +105,7 @@ class ListResponse extends AbstractResponse
         ArrayCollection $orders = null
     ) {
         $hash = $this->getFilterAndOrdersHash($filter, $orders);
-        $cacheKey = md5(CacheKeysInterface::KEY_USER_LIST_DATA_COUNT . $hash);
+        $cacheKey = CacheKeysInterface::KEY_USER_LIST_DATA_COUNT . $hash;
         return $this->getRequest()->getRequestHandler()->getCacheDataOrAdd(
             $cacheKey,
             function () use ($repository, $filter, $orders) {

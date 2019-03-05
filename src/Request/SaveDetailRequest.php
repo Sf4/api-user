@@ -9,7 +9,6 @@
 namespace Sf4\ApiUser\Request;
 
 use Sf4\Api\Request\AbstractRequest;
-use Sf4\ApiUser\CacheAdapter\CacheKeysInterface;
 use Sf4\ApiUser\Dto\Request\SaveDetailDto;
 use Sf4\ApiUser\Response\SaveDetailResponse;
 
@@ -27,9 +26,11 @@ class SaveDetailRequest extends AbstractRequest
 
     protected function getCacheTags(): array
     {
-        return [
-            CacheKeysInterface::TAG_USER_DETAIL,
-            CacheKeysInterface::TAG_USER
-        ];
+        return [];
+    }
+
+    protected function getCacheKey(): ?string
+    {
+        return null;
     }
 }
