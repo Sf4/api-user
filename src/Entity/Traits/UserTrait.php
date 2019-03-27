@@ -22,14 +22,6 @@ trait UserTrait
     use PublicTrait;
     use PrivateTrait;
 
-    /** @ORM\Column(type="string", length=180, unique=true) */
-    protected $email;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    protected $roles;
-
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -59,7 +51,7 @@ trait UserTrait
     /**
      * @param UserDetailInterface|null $userDetail
      */
-    public function setUserDetail(?UserDetailInterface $userDetail)
+    public function setUserDetail(?UserDetailInterface $userDetail): void
     {
         $this->userDetail = $userDetail;
     }

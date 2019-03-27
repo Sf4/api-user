@@ -20,19 +20,4 @@ class UserDetail implements EntityInterface, UserDetailInterface, UserDetailFiel
 {
     use EntityIdTrait;
     use PublicTrait;
-
-    /**
-     * @ORM\Column(type="string", length=100, options={"default" : ""})
-     */
-    protected $firstName;
-
-    /**
-     * @ORM\Column(type="string", length=100, options={"default" : ""})
-     */
-    protected $lastName;
-
-    /**
-     * @ORM\Column(type="string", length=255, options={"default" : ""})
-     */
-    protected $avatar;
 }

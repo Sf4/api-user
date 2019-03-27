@@ -15,7 +15,7 @@ use Sf4\ApiUser\Response\ListResponse;
 
 class ListRequest extends AbstractRequest
 {
-    const ROUTE = 'sf4_api_user_list';
+    public const ROUTE = 'sf4_api_user_list';
 
     public function __construct()
     {

@@ -10,14 +10,14 @@ namespace Sf4\ApiUser\Entity;
 
 interface UserFieldsInterface
 {
-    const FIELD_ID = 'id';
-    const FIELD_UUID = 'uuid';
-    const FIELD_EMAIL = 'email';
-    const FIELD_STATUS = 'status';
-    const FIELD_PASS = 'password';
-    const FIELD_API_TOKEN = 'api_token';
-    const FIELD_ROLES = 'roles';
-    const FIELD_DELETED_AT = 'deleted_at';
-    const FIELD_CREATED_AT = 'created_at';
-    const FIELD_USER_DETAIL = 'userDetail';
+    public const FIELD_ID = 'id';
+    public const FIELD_UUID = 'uuid';
+    public const FIELD_EMAIL = 'email';
+    public const FIELD_STATUS = 'status';
+    public const FIELD_PASS = 'password';
+    public const FIELD_API_TOKEN = 'api_token';
+    public const FIELD_ROLES = 'roles';
+    public const FIELD_DELETED_AT = 'deleted_at';
+    public const FIELD_CREATED_AT = 'created_at';
+    public const FIELD_USER_DETAIL = 'userDetail';
 }

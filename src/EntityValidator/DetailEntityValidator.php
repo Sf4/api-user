@@ -22,18 +22,18 @@ use Symfony\Component\Validator\Constraints\Regex;
 class DetailEntityValidator extends AbstractEntityValidator implements UserFieldsInterface, UserDetailFieldInterface
 {
 
-    const MESSAGE_NOT_BLANK_EMAIL = 'user.detail.validate.not_blank.email';
-    const MESSAGE_NOT_BLANK_STATUS = 'user.detail.validate.not_blank.status';
-    const MESSAGE_NOT_BLANK_FIRST_NAME = 'user.detail.validate.not_blank.first_name';
-    const MESSAGE_NOT_BLANK_LAST_NAME = 'user.detail.validate.not_blank.last_name';
+    public const MESSAGE_NOT_BLANK_EMAIL = 'user.detail.validate.not_blank.email';
+    public const MESSAGE_NOT_BLANK_STATUS = 'user.detail.validate.not_blank.status';
+    public const MESSAGE_NOT_BLANK_FIRST_NAME = 'user.detail.validate.not_blank.first_name';
+    public const MESSAGE_NOT_BLANK_LAST_NAME = 'user.detail.validate.not_blank.last_name';
 
-    const MESSAGE_EMAIL_EMAIL = 'user.detail.validate.email.email';
+    public const MESSAGE_EMAIL_EMAIL = 'user.detail.validate.email.email';
 
-    const MESSAGE_MIN_LENGTH_FIRST_NAME = 'user.detail.validate.min_length.first_name';
-    const MESSAGE_MIN_LENGTH_LAST_NAME = 'user.detail.validate.min_length.last_name';
+    public const MESSAGE_MIN_LENGTH_FIRST_NAME = 'user.detail.validate.min_length.first_name';
+    public const MESSAGE_MIN_LENGTH_LAST_NAME = 'user.detail.validate.min_length.last_name';
 
-    const MESSAGE_REGEX_FIRST_NAME = 'user.detail.validate.regex.first_name';
-    const MESSAGE_REGEX_LAST_NAME = 'user.detail.validate.regex.last_name';
+    public const MESSAGE_REGEX_FIRST_NAME = 'user.detail.validate.regex.first_name';
+    public const MESSAGE_REGEX_LAST_NAME = 'user.detail.validate.regex.last_name';
 
     /**
      * @param EntityInterface $entity

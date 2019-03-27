@@ -26,7 +26,7 @@ class DetailEntitySaver extends AbstractEntitySaver
 
     use SerializerTrait;
 
-    const MESSAGE_INVALID_ENTITY = 'user.detail.validate.invalid_entity';
+    public const MESSAGE_INVALID_ENTITY = 'user.detail.validate.invalid_entity';
 
     /**
      * @param EntityInterface $entity
@@ -55,16 +55,28 @@ class DetailEntitySaver extends AbstractEntitySaver
         $notification = new BaseNotification();
         if ($entity instanceof UserInterface) {
             $entityValidator = new DetailEntityValidator();
-            $entityValidator->setTranslator($this->getResponse()->getRequest()->getRequestHandler()->getTranslator());
-            $entityValidator->validate($entity, $validator, $notification);
+            $response = $this->getResponse();
+            if ($response) {
+                $request = $response->getRequest();
+                if ($request) {
+                    $requestHandler = $request->getRequestHandler();
+                    if ($requestHandler) {
+                        $entityValidator->setTranslator($requestHandler->getTranslator());
+                        $entityValidator->validate($entity, $validator, $notification);
+                    }
+                }
+            }
         } else {
             $errorMessage = new BaseErrorMessage();
             $errorMessage->setKey('entity');
-            $errorMessage->setMessage(
-                $this->getResponse()->translate(
-                    static::MESSAGE_INVALID_ENTITY
-                )
-            );
+            $response = $this->getResponse();
+            if ($response) {
+                $errorMessage->setMessage(
+                    $response->translate(
+                        static::MESSAGE_INVALID_ENTITY
+                    )
+                );
+            }
             $notification->addMessage($errorMessage);
         }
 
@@ -80,11 +92,20 @@ class DetailEntitySaver extends AbstractEntitySaver
         if ($entity instanceof UserInterface) {
             $uuid = $entity->getUuid();
             $cacheKey = CacheKeysInterface::KEY_USER_DETAIL . $uuid;
-            $this->getResponse()->getRequest()->getRequestHandler()->removeByKey($cacheKey);
-            $this->getResponse()->getRequest()->getRequestHandler()->removeByTag([
-                CacheKeysInterface::TAG_USER_DETAIL,
-                CacheKeysInterface::TAG_USER_LIST
-            ]);
+            $response = $this->getResponse();
+            if ($response) {
+                $request = $response->getRequest();
+                if ($request) {
+                    $requestHandler = $request->getRequestHandler();
+                    if ($requestHandler) {
+                        $requestHandler->removeByKey($cacheKey);
+                        $requestHandler->removeByTag([
+                            CacheKeysInterface::TAG_USER_DETAIL,
+                            CacheKeysInterface::TAG_USER_LIST
+                        ]);
+                    }
+                }
+            }
         }
     }
 }

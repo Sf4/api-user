@@ -54,7 +54,7 @@ trait TimestampableTrait
     /**
      * @param \DateTimeInterface|null $created_at
      */
-    public function setCreatedAt(?\DateTimeInterface $created_at)
+    public function setCreatedAt(?\DateTimeInterface $created_at): void
     {
         $this->created_at = $created_at;
     }
@@ -70,7 +70,7 @@ trait TimestampableTrait
     /**
      * @param UserInterface|null $created_by
      */
-    public function setCreatedBy(?UserInterface $created_by)
+    public function setCreatedBy(?UserInterface $created_by): void
     {
         $this->created_by = $created_by;
     }
@@ -86,7 +86,7 @@ trait TimestampableTrait
     /**
      * @param \DateTimeInterface|null $updated_at
      */
-    public function setUpdatedAt(?\DateTimeInterface $updated_at)
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): void
     {
         $this->updated_at = $updated_at;
     }
@@ -102,7 +102,7 @@ trait TimestampableTrait
     /**
      * @param UserInterface|null $updated_by
      */
-    public function setUpdatedBy(?UserInterface $updated_by)
+    public function setUpdatedBy(?UserInterface $updated_by): void
     {
         $this->updated_by = $updated_by;
     }
@@ -118,7 +118,7 @@ trait TimestampableTrait
     /**
      * @param \DateTimeInterface|null $deleted_at
      */
-    public function setDeletedAt(?\DateTimeInterface $deleted_at)
+    public function setDeletedAt(?\DateTimeInterface $deleted_at): void
     {
         $this->deleted_at = $deleted_at;
     }
@@ -134,7 +134,7 @@ trait TimestampableTrait
     /**
      * @param UserInterface|null $deleted_by
      */
-    public function setDeletedBy(?UserInterface $deleted_by)
+    public function setDeletedBy(?UserInterface $deleted_by): void
     {
         $this->deleted_by = $deleted_by;
     }

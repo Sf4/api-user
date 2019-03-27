@@ -16,7 +16,7 @@ use Sf4\ApiUser\Entity\UserInterface;
 
 class UserRepository extends AbstractRepository
 {
-    const TABLE_NAME = 'user';
+    public const TABLE_NAME = 'user';
 
     /**
      * @return string

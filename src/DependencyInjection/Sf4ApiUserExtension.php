@@ -24,16 +24,16 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
 {
 
-    const SF4_API_BUNDLE = 'Sf4ApiBundle';
-    const SF4_API_SECURITY_BUNDLE = 'Sf4ApiSecurityBundle';
-    const SF4_API_USER = 'sf4_api_user';
+    public const SF4_API_BUNDLE = 'Sf4ApiBundle';
+    public const SF4_API_SECURITY_BUNDLE = 'Sf4ApiSecurityBundle';
+    public const SF4_API_USER = 'sf4_api_user';
 
     use Sf4ApiExtensionTrait;
 
     /**
      * @param ContainerBuilder $container
      */
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $bundles = $container->getParameter('kernel.bundles');
         if (isset($bundles[static::SF4_API_BUNDLE])) {
@@ -58,7 +58,7 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
      * @param ContainerBuilder $container
      * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $this->loadServices($container, __DIR__);
     }
@@ -66,7 +66,7 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
     /**
      * @return array
      */
-    protected function getRoutes()
+    protected function getRoutes(): array
     {
         return [
             [
@@ -87,7 +87,7 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
     /**
      * @return array
      */
-    protected function getLocaleRoutes()
+    protected function getLocaleRoutes(): array
     {
         $localeRoutes = [];
         $routes = $this->getRoutes();
@@ -117,7 +117,7 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
     /**
      * @return array
      */
-    protected function getEntities()
+    protected function getEntities(): array
     {
         return [
             [

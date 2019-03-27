@@ -32,14 +32,14 @@ trait DetailToArrayTrait
         return $data;
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): string
     {
         $active = DetailDtoInterface::STATUS_CODE_ACTIVE;
         $inactive = DetailDtoInterface::STATUS_CODE_INACTIVE;
-        return $this->getStatus() == StatusSettingInterface::ACTIVE ? $active : $inactive;
+        return $this->getStatus() === StatusSettingInterface::ACTIVE ? $active : $inactive;
     }
 
-    public function getAvatarOrDefault()
+    public function getAvatarOrDefault(): string
     {
         if (empty($this->getAvatar())) {
             return 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif';

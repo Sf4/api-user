@@ -24,23 +24,23 @@ class UserDetailRepository extends AbstractRepository implements UserFieldsInter
 {
     use ListTrait;
 
-    const TABLE_NAME = 'user_detail';
-    const ALIAS_MAIN = 'main';
-    const ALIAS_DETAIL = 'd';
-    const PREFIX_MAIN = self::ALIAS_MAIN . '.';
-    const PREFIX_DETAIL = self::ALIAS_DETAIL . '.';
+    public const TABLE_NAME = 'user_detail';
+    public const ALIAS_MAIN = 'main';
+    public const ALIAS_DETAIL = 'd';
+    public const PREFIX_MAIN = self::ALIAS_MAIN . '.';
+    public const PREFIX_DETAIL = self::ALIAS_DETAIL . '.';
 
-    const DB_FIELD_ID = self::PREFIX_MAIN . self::FIELD_ID;
-    const DB_DETAIL_ID = self::PREFIX_DETAIL . self::FIELD_ID;
-    const DB_FIELD_UUID = self::PREFIX_MAIN . self::FIELD_UUID;
-    const DB_FIELD_EMAIL = self::PREFIX_MAIN . self::FIELD_EMAIL;
-    const DB_FIELD_ROLES = self::PREFIX_MAIN . self::FIELD_ROLES;
-    const DB_FIELD_STATUS = self::PREFIX_MAIN . self::FIELD_STATUS;
-    const DB_FIELD_DELETED_AT = self::PREFIX_MAIN . self::FIELD_DELETED_AT;
-    const DB_FIELD_AVATAR = self::PREFIX_DETAIL . self::FIELD_AVATAR;
-    const DB_FIELD_LAST_NAME = self::PREFIX_DETAIL . self::FIELD_LAST_NAME;
-    const DB_FIELD_FIRST_NAME = self::PREFIX_DETAIL . self::FIELD_FIRST_NAME;
-    const DB_FIELD_USER_DETAIL = self::PREFIX_MAIN . self::FIELD_USER_DETAIL;
+    public const DB_FIELD_ID = self::PREFIX_MAIN . self::FIELD_ID;
+    public const DB_DETAIL_ID = self::PREFIX_DETAIL . self::FIELD_ID;
+    public const DB_FIELD_UUID = self::PREFIX_MAIN . self::FIELD_UUID;
+    public const DB_FIELD_EMAIL = self::PREFIX_MAIN . self::FIELD_EMAIL;
+    public const DB_FIELD_ROLES = self::PREFIX_MAIN . self::FIELD_ROLES;
+    public const DB_FIELD_STATUS = self::PREFIX_MAIN . self::FIELD_STATUS;
+    public const DB_FIELD_DELETED_AT = self::PREFIX_MAIN . self::FIELD_DELETED_AT;
+    public const DB_FIELD_AVATAR = self::PREFIX_DETAIL . self::FIELD_AVATAR;
+    public const DB_FIELD_LAST_NAME = self::PREFIX_DETAIL . self::FIELD_LAST_NAME;
+    public const DB_FIELD_FIRST_NAME = self::PREFIX_DETAIL . self::FIELD_FIRST_NAME;
+    public const DB_FIELD_USER_DETAIL = self::PREFIX_MAIN . self::FIELD_USER_DETAIL;
 
     protected function getEntityClass(): string
     {

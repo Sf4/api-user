@@ -14,7 +14,7 @@ use Sf4\ApiUser\Response\SaveDetailResponse;
 
 class SaveDetailRequest extends AbstractRequest
 {
-    const ROUTE = 'sf4_api_user_save_detail';
+    public const ROUTE = 'sf4_api_user_save_detail';
 
     public function __construct()
     {

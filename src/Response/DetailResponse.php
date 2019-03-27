@@ -25,16 +25,21 @@ class DetailResponse extends AbstractResponse
 
     protected function getIdFromRequest()
     {
-        $request = $this->getRequest()->getRequest();
-
-        return $request->get('id');
+        $request = $this->getRequest();
+        if ($request) {
+            $httpRequest = $request->getRequest();
+            if ($httpRequest) {
+                return $httpRequest->get('id');
+            }
+        }
+        return null;
     }
 
     /**
      * @param DetailDto $dto
      * @param $userUuid
      */
-    protected function populateDetailDto(DetailDto $dto, $userUuid)
+    protected function populateDetailDto(DetailDto $dto, $userUuid): void
     {
         /** @var UserDetailRepository $repository */
         $repository = $this->getRepository(UserDetailRepository::TABLE_NAME);

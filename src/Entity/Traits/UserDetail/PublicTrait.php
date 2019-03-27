@@ -10,13 +10,22 @@ namespace Sf4\ApiUser\Entity\Traits\UserDetail;
 
 trait PublicTrait
 {
+    /**
+     * @ORM\Column(type="string", length=100, options={"default" : ""})
+     */
     protected $firstName;
 
+    /**
+     * @ORM\Column(type="string", length=100, options={"default" : ""})
+     */
     protected $lastName;
 
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : ""})
+     */
     protected $avatar;
 
-    public function getFullName()
+    public function getFullName(): string
     {
         $fullName = $this->getFirstName() . ' ' . $this->getLastName();
         if ($fullName === ' ') {
@@ -31,7 +40,7 @@ trait PublicTrait
         return $this->firstName;
     }
 
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -41,7 +50,7 @@ trait PublicTrait
         return $this->lastName;
     }
 
-    public function setLastName($lastName)
+    public function setLastName($lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -51,7 +60,7 @@ trait PublicTrait
         return $this->avatar;
     }
 
-    public function setAvatar($avatar)
+    public function setAvatar($avatar): void
     {
         $this->avatar = $avatar;
     }

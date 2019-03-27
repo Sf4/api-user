@@ -10,14 +10,14 @@ namespace Sf4\ApiUser\CacheAdapter;
 
 interface CacheKeysInterface
 {
-    const KEY_USER_LIST = 'user_list_';
-    const KEY_USER_LIST_ITEM = 'user_list_item_';
-    const KEY_USER_DETAIL = 'user_detail_';
-    const KEY_USER_LIST_DATA = 'user_list_data_';
-    const KEY_USER_LIST_DATA_COUNT = 'user_list_data_count_';
+    public const KEY_USER_LIST = 'user_list_';
+    public const KEY_USER_LIST_ITEM = 'user_list_item_';
+    public const KEY_USER_DETAIL = 'user_detail_';
+    public const KEY_USER_LIST_DATA = 'user_list_data_';
+    public const KEY_USER_LIST_DATA_COUNT = 'user_list_data_count_';
 
-    const TAG_USER = 'user';
-    const TAG_USER_DETAIL = 'user_detail';
-    const TAG_USER_LIST = 'user_list';
-    const TAG_USER_LIST_ITEM = 'user_list_item';
+    public const TAG_USER = 'user';
+    public const TAG_USER_DETAIL = 'user_detail';
+    public const TAG_USER_LIST = 'user_list';
+    public const TAG_USER_LIST_ITEM = 'user_list_item';
 }

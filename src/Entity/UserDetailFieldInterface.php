@@ -10,7 +10,7 @@ namespace Sf4\ApiUser\Entity;
 
 interface UserDetailFieldInterface
 {
-    const FIELD_FIRST_NAME = 'firstName';
-    const FIELD_LAST_NAME = 'lastName';
-    const FIELD_AVATAR = 'avatar';
+    public const FIELD_FIRST_NAME = 'firstName';
+    public const FIELD_LAST_NAME = 'lastName';
+    public const FIELD_AVATAR = 'avatar';
 }

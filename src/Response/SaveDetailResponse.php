@@ -16,7 +16,7 @@ use Sf4\ApiUser\Repository\UserRepository;
 
 class SaveDetailResponse extends AbstractSaveResponse
 {
-    const MESSAGE_CODE_PREFIX = 'user.detail.';
+    public const MESSAGE_CODE_PREFIX = 'user.detail.';
 
     protected function getSaveDtoClass(): string
     {
@@ -27,11 +27,14 @@ class SaveDetailResponse extends AbstractSaveResponse
     {
         $request = $this->getRequest();
         if ($request) {
-            $entityClass = $request->getRequestHandler()->getRepositoryFactory()->getEntityClass(
-                UserRepository::TABLE_NAME
-            );
-            if ($entityClass) {
-                return $entityClass;
+            $requestHandler = $request->getRequestHandler();
+            if ($requestHandler) {
+                $entityClass = $requestHandler->getRepositoryFactory()->getEntityClass(
+                    UserRepository::TABLE_NAME
+                );
+                if ($entityClass) {
+                    return $entityClass;
+                }
             }
         }
 

@@ -10,8 +10,8 @@ namespace Sf4\ApiUser\Dto\Response;
 
 interface DetailDtoInterface
 {
-    const STATUS_CODE_ACTIVE = 'active';
-    const STATUS_CODE_INACTIVE = 'inactive';
-    const STATUS_CODE_ARCHIVED = 'archived';
-    const STATUS_CODE_PENDING = 'pending';
+    public const STATUS_CODE_ACTIVE = 'active';
+    public const STATUS_CODE_INACTIVE = 'inactive';
+    public const STATUS_CODE_ARCHIVED = 'archived';
+    public const STATUS_CODE_PENDING = 'pending';
 }

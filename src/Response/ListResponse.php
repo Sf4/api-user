@@ -11,6 +11,8 @@ namespace Sf4\ApiUser\Response;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sf4\Api\Dto\Filter\FilterInterface;
 use Sf4\Api\Repository\RepositoryInterface;
+use Sf4\Api\RequestHandler\RequestHandler;
+use Sf4\Api\RequestHandler\RequestHandlerInterface;
 use Sf4\Api\Response\AbstractResponse;
 use Sf4\Api\Utils\Traits\ArrayCollectionToArrayTrait;
 use Sf4\ApiUser\CacheAdapter\CacheKeysInterface;
@@ -40,12 +42,13 @@ class ListResponse extends AbstractResponse
      * @throws \Psr\Cache\CacheException
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    protected function populateListDto(ListDto $dto)
+    protected function populateListDto(ListDto $dto): void
     {
         $filter = null;
         $orders = null;
+        $request = $this->getRequest();
         /** @var \Sf4\ApiUser\Dto\Request\ListDto $requestDto */
-        if ($requestDto = $this->getRequest()->getDto()) {
+        if ($request && $requestDto = $request->getDto()) {
             /** @var ListFilter $filter */
             $filter = $requestDto->getFilter();
             $orders = $requestDto->getOrders();
@@ -77,9 +80,13 @@ class ListResponse extends AbstractResponse
     ) {
         $hash = $this->getFilterAndOrdersHash($filter, $orders);
         $cacheKey = CacheKeysInterface::KEY_USER_LIST_DATA . $hash;
-        return $this->getRequest()->getRequestHandler()->getCacheDataOrAdd(
+        $requestHandler = $this->getRequestHandler();
+        if (!$requestHandler) {
+            return null;
+        }
+        return $requestHandler->getCacheDataOrAdd(
             $cacheKey,
-            function () use ($repository, $filter, $orders) {
+            static function () use ($repository, $filter, $orders) {
                 if ($repository instanceof UserDetailRepository) {
                     return $repository->getListData($filter, $orders);
                 }
@@ -89,6 +96,18 @@ class ListResponse extends AbstractResponse
                 CacheKeysInterface::TAG_USER_LIST
             ]
         );
+    }
+
+    /**
+     * @return RequestHandler|null
+     */
+    protected function getRequestHandler(): ?RequestHandlerInterface
+    {
+        $request = $this->getRequest();
+        if (!$request) {
+            return null;
+        }
+        return $request->getRequestHandler();
     }
 
     /**
@@ -106,18 +125,23 @@ class ListResponse extends AbstractResponse
     ) {
         $hash = $this->getFilterAndOrdersHash($filter, $orders);
         $cacheKey = CacheKeysInterface::KEY_USER_LIST_DATA_COUNT . $hash;
-        return $this->getRequest()->getRequestHandler()->getCacheDataOrAdd(
-            $cacheKey,
-            function () use ($repository, $filter, $orders) {
-                if ($repository instanceof UserDetailRepository) {
-                    return $repository->getListDataCount($filter, $orders);
-                }
-                return null;
-            },
-            [
-                CacheKeysInterface::TAG_USER_LIST
-            ]
-        );
+        $requestHandler = $this->getRequestHandler();
+        if ($requestHandler) {
+            return $requestHandler->getCacheDataOrAdd(
+                $cacheKey,
+                static function () use ($repository, $filter, $orders) {
+                    if ($repository instanceof UserDetailRepository) {
+                        return $repository->getListDataCount($filter, $orders);
+                    }
+                    return null;
+                },
+                [
+                    CacheKeysInterface::TAG_USER_LIST
+                ]
+            );
+        }
+
+        return null;
     }
 
     /**
@@ -125,10 +149,10 @@ class ListResponse extends AbstractResponse
      * @param ArrayCollection|null $orders
      * @return string
      */
-    protected function getFilterAndOrdersHash(FilterInterface $filter = null, ArrayCollection $orders = null)
+    protected function getFilterAndOrdersHash(FilterInterface $filter = null, ArrayCollection $orders = null): string
     {
-        $filterArray = $filter->toArray();
-        $ordersArray = $this->arrayCollectionToArray($orders);
+        $filterArray = $filter ? $filter->toArray() : [];
+        $ordersArray = $orders ? $this->arrayCollectionToArray($orders) : [];
         $filterJson = json_encode($filterArray);
         $ordersJson = json_encode($ordersArray);
         $json = $filterJson . $ordersJson;
