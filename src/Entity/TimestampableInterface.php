@@ -8,17 +8,19 @@
 
 namespace Sf4\ApiUser\Entity;
 
+use DateTimeInterface;
+
 interface TimestampableInterface
 {
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getCreatedAt(): ?\DateTimeInterface;
+    public function getCreatedAt(): ?DateTimeInterface;
 
     /**
-     * @param \DateTimeInterface|null $created_at
+     * @param DateTimeInterface|null $created_at
      */
-    public function setCreatedAt(?\DateTimeInterface $created_at);
+    public function setCreatedAt(?DateTimeInterface $created_at);
 
     /**
      * @return UserInterface|null
@@ -31,14 +33,14 @@ interface TimestampableInterface
     public function setCreatedBy(?UserInterface $created_by);
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getUpdatedAt(): ?\DateTimeInterface;
+    public function getUpdatedAt(): ?DateTimeInterface;
 
     /**
-     * @param \DateTimeInterface|null $updated_at
+     * @param DateTimeInterface|null $updated_at
      */
-    public function setUpdatedAt(?\DateTimeInterface $updated_at);
+    public function setUpdatedAt(?DateTimeInterface $updated_at);
 
     /**
      * @return UserInterface|null
@@ -51,14 +53,14 @@ interface TimestampableInterface
     public function setUpdatedBy(?UserInterface $updated_by);
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getDeletedAt(): ?\DateTimeInterface;
+    public function getDeletedAt(): ?DateTimeInterface;
 
     /**
-     * @param \DateTimeInterface|null $deleted_at
+     * @param DateTimeInterface|null $deleted_at
      */
-    public function setDeletedAt(?\DateTimeInterface $deleted_at);
+    public function setDeletedAt(?DateTimeInterface $deleted_at);
 
     /**
      * @return UserInterface|null

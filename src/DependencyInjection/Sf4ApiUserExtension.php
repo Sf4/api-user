@@ -8,6 +8,8 @@
 
 namespace Sf4\ApiUser\DependencyInjection;
 
+use Exception;
+use Sf4\Api\DependencyInjection\Configuration as Sf4ApiConfiguration;
 use Sf4\Api\DependencyInjection\Traits\Sf4ApiExtensionTrait;
 use Sf4\ApiUser\Entity\User;
 use Sf4\ApiUser\Entity\UserDetail;
@@ -18,7 +20,6 @@ use Sf4\ApiUser\Request\ListRequest;
 use Sf4\ApiUser\Request\SaveDetailRequest;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Sf4\Api\DependencyInjection\Configuration as Sf4ApiConfiguration;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 
 class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
@@ -56,7 +57,7 @@ class Sf4ApiUserExtension extends Extension implements PrependExtensionInterface
      *
      * @param array $configs
      * @param ContainerBuilder $container
-     * @throws \Exception
+     * @throws Exception
      */
     public function load(array $configs, ContainerBuilder $container): void
     {

@@ -8,6 +8,9 @@
 
 namespace Sf4\ApiUser\Request;
 
+use Closure;
+use Psr\Cache\CacheException;
+use Psr\Cache\InvalidArgumentException;
 use Sf4\Api\Request\AbstractRequest;
 use Sf4\ApiUser\CacheAdapter\CacheKeysInterface;
 use Sf4\ApiUser\Dto\Request\ListDto;
@@ -26,15 +29,15 @@ class ListRequest extends AbstractRequest
     }
 
     /**
-     * @param \Closure $closure
+     * @param Closure $closure
      * @param string|null $cacheKey
      * @param array $tags
      * @param int|null $expiresAfter
-     * @throws \Psr\Cache\CacheException
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws CacheException
+     * @throws InvalidArgumentException
      */
     public function getCachedResponse(
-        \Closure $closure,
+        Closure $closure,
         string $cacheKey = null,
         array $tags = [],
         int $expiresAfter = null

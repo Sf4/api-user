@@ -23,11 +23,6 @@ trait UserTrait
     use PrivateTrait;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    protected $status;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Sf4\ApiUser\Entity\UserDetail", cascade={"persist"})
      */
     protected $userDetail;

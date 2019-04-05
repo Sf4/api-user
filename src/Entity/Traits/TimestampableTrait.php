@@ -8,8 +8,9 @@
 
 namespace Sf4\ApiUser\Entity\Traits;
 
-use Sf4\ApiUser\Entity\UserInterface;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Sf4\ApiUser\Entity\UserInterface;
 
 trait TimestampableTrait
 {
@@ -44,17 +45,17 @@ trait TimestampableTrait
     private $deleted_by;
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $created_at
+     * @param DateTimeInterface|null $created_at
      */
-    public function setCreatedAt(?\DateTimeInterface $created_at): void
+    public function setCreatedAt(?DateTimeInterface $created_at): void
     {
         $this->created_at = $created_at;
     }
@@ -76,17 +77,17 @@ trait TimestampableTrait
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updated_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $updated_at
+     * @param DateTimeInterface|null $updated_at
      */
-    public function setUpdatedAt(?\DateTimeInterface $updated_at): void
+    public function setUpdatedAt(?DateTimeInterface $updated_at): void
     {
         $this->updated_at = $updated_at;
     }
@@ -108,17 +109,17 @@ trait TimestampableTrait
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getDeletedAt(): ?\DateTimeInterface
+    public function getDeletedAt(): ?DateTimeInterface
     {
         return $this->deleted_at;
     }
 
     /**
-     * @param \DateTimeInterface|null $deleted_at
+     * @param DateTimeInterface|null $deleted_at
      */
-    public function setDeletedAt(?\DateTimeInterface $deleted_at): void
+    public function setDeletedAt(?DateTimeInterface $deleted_at): void
     {
         $this->deleted_at = $deleted_at;
     }

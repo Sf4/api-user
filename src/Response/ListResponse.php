@@ -9,10 +9,10 @@
 namespace Sf4\ApiUser\Response;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Psr\Cache\CacheException;
+use Psr\Cache\InvalidArgumentException;
 use Sf4\Api\Dto\Filter\FilterInterface;
 use Sf4\Api\Repository\RepositoryInterface;
-use Sf4\Api\RequestHandler\RequestHandler;
-use Sf4\Api\RequestHandler\RequestHandlerInterface;
 use Sf4\Api\Response\AbstractResponse;
 use Sf4\Api\Utils\Traits\ArrayCollectionToArrayTrait;
 use Sf4\ApiUser\CacheAdapter\CacheKeysInterface;
@@ -26,8 +26,8 @@ class ListResponse extends AbstractResponse
     use ArrayCollectionToArrayTrait;
 
     /**
-     * @throws \Psr\Cache\CacheException
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws CacheException
+     * @throws InvalidArgumentException
      */
     public function init()
     {
@@ -39,8 +39,8 @@ class ListResponse extends AbstractResponse
 
     /**
      * @param ListDto $dto
-     * @throws \Psr\Cache\CacheException
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws CacheException
+     * @throws InvalidArgumentException
      */
     protected function populateListDto(ListDto $dto): void
     {
@@ -70,8 +70,8 @@ class ListResponse extends AbstractResponse
      * @param FilterInterface|null $filter
      * @param ArrayCollection|null $orders
      * @return array|mixed|null
-     * @throws \Psr\Cache\CacheException
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws CacheException
+     * @throws InvalidArgumentException
      */
     protected function getListData(
         RepositoryInterface $repository,
@@ -99,15 +99,19 @@ class ListResponse extends AbstractResponse
     }
 
     /**
-     * @return RequestHandler|null
+     * @param FilterInterface|null $filter
+     * @param ArrayCollection|null $orders
+     * @return string
      */
-    protected function getRequestHandler(): ?RequestHandlerInterface
+    protected function getFilterAndOrdersHash(FilterInterface $filter = null, ArrayCollection $orders = null): string
     {
-        $request = $this->getRequest();
-        if (!$request) {
-            return null;
-        }
-        return $request->getRequestHandler();
+        $filterArray = $filter ? $filter->toArray() : [];
+        $ordersArray = $orders ? $this->arrayCollectionToArray($orders) : [];
+        $filterJson = json_encode($filterArray);
+        $ordersJson = json_encode($ordersArray);
+        $json = $filterJson . $ordersJson;
+
+        return md5($json);
     }
 
     /**
@@ -115,8 +119,8 @@ class ListResponse extends AbstractResponse
      * @param FilterInterface|null $filter
      * @param ArrayCollection|null $orders
      * @return array|mixed|null
-     * @throws \Psr\Cache\CacheException
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws CacheException
+     * @throws InvalidArgumentException
      */
     protected function getListDataCount(
         RepositoryInterface $repository,
@@ -142,21 +146,5 @@ class ListResponse extends AbstractResponse
         }
 
         return null;
-    }
-
-    /**
-     * @param FilterInterface|null $filter
-     * @param ArrayCollection|null $orders
-     * @return string
-     */
-    protected function getFilterAndOrdersHash(FilterInterface $filter = null, ArrayCollection $orders = null): string
-    {
-        $filterArray = $filter ? $filter->toArray() : [];
-        $ordersArray = $orders ? $this->arrayCollectionToArray($orders) : [];
-        $filterJson = json_encode($filterArray);
-        $ordersJson = json_encode($ordersArray);
-        $json = $filterJson . $ordersJson;
-
-        return md5($json);
     }
 }

@@ -13,40 +13,68 @@ use Doctrine\ORM\Mapping as ORM;
 trait PrivateTrait
 {
     /**
-     * @var string The hashed password
+     * @var string|null The hashed password
      * @ORM\Column(type="string")
      */
     protected $password;
 
     /**
+     * @var string|null $api_token
      * @ORM\Column(type="string", unique=true)
      */
     protected $api_token;
 
     /**
-     * @return string
+     * @var string|null $google_id
+     * @ORM\Column(type="string")
      */
-    public function getPassword(): string
+    protected $google_id;
+
+    /**
+     * @return string|null
+     */
+    public function getPassword(): ?string
     {
-        return (string)$this->password;
+        return $this->password;
     }
 
-    public function setPassword(string $password): self
+    /**
+     * @param string|null $password
+     */
+    public function setPassword(?string $password): void
     {
         $this->password = $password;
-
-        return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getApiToken(): ?string
     {
         return $this->api_token;
     }
 
-    public function setApiToken(string $api_token): self
+    /**
+     * @param string|null $api_token
+     */
+    public function setApiToken(?string $api_token): void
     {
         $this->api_token = $api_token;
+    }
 
-        return $this;
+    /**
+     * @return string|null
+     */
+    public function getGoogleId(): ?string
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * @param string|null $google_id
+     */
+    public function setGoogleId(?string $google_id): void
+    {
+        $this->google_id = $google_id;
     }
 }

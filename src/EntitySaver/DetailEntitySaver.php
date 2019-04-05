@@ -8,6 +8,7 @@
 
 namespace Sf4\ApiUser\EntitySaver;
 
+use Psr\Cache\InvalidArgumentException;
 use Sf4\Api\Dto\DtoInterface;
 use Sf4\Api\Entity\EntityInterface;
 use Sf4\Api\EntitySaver\AbstractEntitySaver;
@@ -55,16 +56,10 @@ class DetailEntitySaver extends AbstractEntitySaver
         $notification = new BaseNotification();
         if ($entity instanceof UserInterface) {
             $entityValidator = new DetailEntityValidator();
-            $response = $this->getResponse();
-            if ($response) {
-                $request = $response->getRequest();
-                if ($request) {
-                    $requestHandler = $request->getRequestHandler();
-                    if ($requestHandler) {
-                        $entityValidator->setTranslator($requestHandler->getTranslator());
-                        $entityValidator->validate($entity, $validator, $notification);
-                    }
-                }
+            $requestHandler = $this->getRequestHandler();
+            if ($requestHandler) {
+                $entityValidator->setTranslator($requestHandler->getTranslator());
+                $entityValidator->validate($entity, $validator, $notification);
             }
         } else {
             $errorMessage = new BaseErrorMessage();
@@ -85,26 +80,20 @@ class DetailEntitySaver extends AbstractEntitySaver
 
     /**
      * @param EntityInterface $entity
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function postEntitySave(EntityInterface $entity)
     {
         if ($entity instanceof UserInterface) {
             $uuid = $entity->getUuid();
             $cacheKey = CacheKeysInterface::KEY_USER_DETAIL . $uuid;
-            $response = $this->getResponse();
-            if ($response) {
-                $request = $response->getRequest();
-                if ($request) {
-                    $requestHandler = $request->getRequestHandler();
-                    if ($requestHandler) {
-                        $requestHandler->removeByKey($cacheKey);
-                        $requestHandler->removeByTag([
-                            CacheKeysInterface::TAG_USER_DETAIL,
-                            CacheKeysInterface::TAG_USER_LIST
-                        ]);
-                    }
-                }
+            $requestHandler = $this->getRequestHandler();
+            if ($requestHandler) {
+                $requestHandler->removeByKey($cacheKey);
+                $requestHandler->removeByTag([
+                    CacheKeysInterface::TAG_USER_DETAIL,
+                    CacheKeysInterface::TAG_USER_LIST
+                ]);
             }
         }
     }

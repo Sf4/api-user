@@ -25,16 +25,13 @@ class SaveDetailResponse extends AbstractSaveResponse
 
     protected function getEntityClass(): string
     {
-        $request = $this->getRequest();
-        if ($request) {
-            $requestHandler = $request->getRequestHandler();
-            if ($requestHandler) {
-                $entityClass = $requestHandler->getRepositoryFactory()->getEntityClass(
-                    UserRepository::TABLE_NAME
-                );
-                if ($entityClass) {
-                    return $entityClass;
-                }
+        $requestHandler = $this->getRequestHandler();
+        if ($requestHandler) {
+            $entityClass = $requestHandler->getRepositoryFactory()->getEntityClass(
+                UserRepository::TABLE_NAME
+            );
+            if ($entityClass) {
+                return $entityClass;
             }
         }
 

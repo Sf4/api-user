@@ -29,4 +29,10 @@ interface UserInterface
     public function setRoles($roles);
 
     public function getUserDetail(): ?UserDetailInterface;
+
+    public function getPassword(): ?string;
+
+    public function getApiToken(): ?string;
+
+    public function getGoogleId(): ?string;
 }
