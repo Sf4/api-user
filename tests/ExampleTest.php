@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace sf4\api-user;
+namespace sf4\ApiUser;
 
-class ExampleTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ExampleTest extends TestCase
 {
     /**
      * Test that true does in fact equal true
