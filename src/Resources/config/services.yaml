@@ -1,3 +1,10 @@
 services:
     Sf4\ApiUser\Routing\ApiUserLoader:
         tags: [routing.loader]
+
+    Sf4\ApiUser\Command\CreateUserCommand:
+        calls:
+            - method: setEntityManager
+              arguments:
+                  - '@Doctrine\ORM\EntityManagerInterface'
+        tags: [console.command]

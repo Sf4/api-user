@@ -42,6 +42,7 @@ class UserCreator
         $user->setRoles([
             'ROLE_USER'
         ]);
+        $user->setGoogleId('');
         $this->populateObject($data, $user);
 
         if (array_key_exists('create_api_token', $data)) {
@@ -52,6 +53,7 @@ class UserCreator
 
         $userDetail = new UserDetail();
         $userDetail->createUuid();
+        $userDetail->setAvatar('');
         $this->populateObject($data, $userDetail);
 
         $user->setUserDetail($userDetail);
